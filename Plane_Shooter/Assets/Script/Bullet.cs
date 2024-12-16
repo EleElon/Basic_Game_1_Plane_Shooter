@@ -15,9 +15,15 @@ public class Bullet : MonoBehaviour {
 
     public float timeToDestroy;
 
+    bool isPaused = false;
+
+    float timeToDestroyReset;
+
     AudioSource aus;
 
     public AudioClip hitSound;
+
+    UIManager m_ui;
 
     public GameObject hitVFX;
 
@@ -26,11 +32,37 @@ public class Bullet : MonoBehaviour {
         m_rb = GetComponent<Rigidbody2D>();
         m_gc = FindAnyObjectByType<GameController>();
         aus = FindAnyObjectByType<AudioSource>();
-        Destroy(gameObject, timeToDestroy);
+        m_ui = FindAnyObjectByType<UIManager>();
+        // Destroy(gameObject, timeToDestroy);
     }
 
     // Update is called once per frame
     void Update() {
+        if (m_gc.isGameOver()) {
+            Destroy(gameObject);
+            return;
+        }
+
+        if (m_ui.IsGamePause()) {
+            isPaused = true;
+        }
+        else {
+            isPaused = false;
+        }
+
+        if (!isPaused) {
+            timeToDestroy -= Time.deltaTime;
+
+            if (timeToDestroy <= 0) {
+                Destroy(gameObject);
+                timeToDestroy = timeToDestroyReset;
+            }
+        }
+        
+        if (m_gc.isGameOver() || m_ui.IsGamePause()) {
+            m_rb.velocity = Vector2.zero;
+            return;
+        }
         m_rb.velocity = Vector2.up * speed;
     }
     private void OnTriggerEnter2D(Collider2D col) {

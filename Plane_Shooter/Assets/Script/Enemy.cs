@@ -10,13 +10,20 @@ public class Enemy : MonoBehaviour {
 
     public Rigidbody2D m_rb;
 
+    UIManager m_ui;
+
     void Start() {
         m_rb = GetComponent<Rigidbody2D>();
         m_gc = FindAnyObjectByType<GameController>();
+        m_ui = FindAnyObjectByType<UIManager>();
     }
 
     // Update is called once per frame
     void Update() {
+        if (m_gc.isGameOver() || m_ui.IsGamePause()) {
+            m_rb.velocity = Vector2.zero;
+            return;
+        }
         m_rb.velocity = Vector2.down * moveSpeed;
     }
 

@@ -25,6 +25,12 @@ public class GameController : MonoBehaviour {
 
     public Player u;
 
+    public AudioManager aum;
+
+    private void Awake() {
+        // aum = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+    }
+
     // Start is called before the first frame update
     void Start() {
         m_spawnTime = 0;
@@ -46,7 +52,7 @@ public class GameController : MonoBehaviour {
             m_spawnBGTime -= Time.deltaTime;
 
             if (m_spawnTime < 0) {
-                enemySpawn();
+                // enemySpawn();
 
                 m_spawnTime = spawnTime;
             }

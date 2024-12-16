@@ -21,9 +21,7 @@ public class Player : MonoBehaviour {
 
     public Transform shootingPoint;
 
-    public AudioSource aus;
-
-    public AudioClip shootingSound;
+    public AudioManager aum;
 
     UIManager m_ui;
 
@@ -99,8 +97,8 @@ public class Player : MonoBehaviour {
         }
 
         if (bullet && shootingPoint) {
-            if (aus & shootingPoint) {
-                aus.PlayOneShot(shootingSound);
+            if (aum & shootingPoint) {
+                aum.playSFX(aum.shootingSound);
             }
             Instantiate(bullet, shootingPoint.position, quaternion.identity);
         }
@@ -127,6 +125,10 @@ public class Player : MonoBehaviour {
     private void OnTriggerEnter2D(Collider2D other) {
         if (other.CompareTag("Enemy")) {
             // m_gc.setGameOver(true);
+            if (aum && aum.loseSound) {
+                aum.playSFX(aum.loseSound);
+            }
+            
             m_gc.HPDecrease();
 
             Destroy(other.gameObject);

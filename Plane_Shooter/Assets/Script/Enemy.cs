@@ -12,6 +12,8 @@ public class Enemy : MonoBehaviour {
 
     UIManager m_ui;
 
+    public AudioManager aum;
+
     void Start() {
         m_rb = GetComponent<Rigidbody2D>();
         m_gc = FindAnyObjectByType<GameController>();
@@ -29,7 +31,12 @@ public class Enemy : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D other) {
         if (other.CompareTag("DeathZone")) {
-            m_gc.setGameOver(true);
+            // m_gc.setGameOver(true);
+            m_gc.HPDecrease();
+
+            if (aum && aum.deathSound) {
+                aum.playSFX(aum.deathSound);
+            }
 
             Destroy(gameObject);
         }

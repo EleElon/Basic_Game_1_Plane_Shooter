@@ -49,6 +49,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   timeToDestroy: 7
+  hitSound: {fileID: 0}
+  hitVFX: {fileID: 1139734563641271781, guid: 466127563e355b94dae5787d811ef3ee, type: 3}
 --- !u!212 &4474145462679418700
 SpriteRenderer:
   m_ObjectHideFlags: 0

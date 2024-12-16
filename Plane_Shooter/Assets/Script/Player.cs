@@ -6,6 +6,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 public class Player : MonoBehaviour {
+    
     private Vector3 moveSpeed = Vector3.zero;
 
     public float maxSpeed;
@@ -19,6 +20,10 @@ public class Player : MonoBehaviour {
     public GameController m_gc;
 
     public Transform shootingPoint;
+
+    public AudioSource aus;
+
+    public AudioClip shootingSound;
 
     // Start is called before the first frame update
     void Start() {
@@ -55,6 +60,9 @@ public class Player : MonoBehaviour {
 
     public void Shoot() {
         if (bullet && shootingPoint) {
+            if (aus & shootingPoint) {
+                aus.PlayOneShot(shootingSound);
+            }
             Instantiate(bullet, shootingPoint.position, quaternion.identity);
         }
     }

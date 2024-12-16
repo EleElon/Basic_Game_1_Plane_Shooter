@@ -7,15 +7,22 @@ using UnityEngine;
 
 public class Player : MonoBehaviour {
     private Vector3 moveSpeed = Vector3.zero;
+
     public float maxSpeed;
+
     public float giaToc;
+
     public float giaTocGiam;
+
     public GameObject bullet;
+
+    public GameController m_gc;
+
     public Transform shootingPoint;
 
     // Start is called before the first frame update
     void Start() {
-
+        m_gc = FindAnyObjectByType<GameController>();
     }
 
     // Update is called once per frame
@@ -54,8 +61,17 @@ public class Player : MonoBehaviour {
 
     private void OnCollisionEnter2D(Collision2D col) {
         if (col.gameObject.CompareTag("Enemy")) {
-            Debug.Log("trueeee");
+            m_gc.setGameOver(true);
+
+            Destroy(col.gameObject);
         }
     }
-    
+
+    private void OnTriggerEnter2D(Collider2D other) {
+        if (other.CompareTag("Enemy")) {
+            m_gc.setGameOver(true);
+
+            Destroy(other.gameObject);
+        }
+    }
 }

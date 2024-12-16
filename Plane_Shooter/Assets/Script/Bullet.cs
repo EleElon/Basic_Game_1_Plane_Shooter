@@ -5,11 +5,17 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour {
     Rigidbody2D m_rb;
+
+    GameController m_gc;
+
     public float speed;
+
     public float timeToDestroy;
+
     // Start is called before the first frame update
     void Start() {
         m_rb = GetComponent<Rigidbody2D>();
+        m_gc = FindAnyObjectByType<GameController>();
         Destroy(gameObject, timeToDestroy);
     }
 
@@ -19,7 +25,12 @@ public class Bullet : MonoBehaviour {
     }
     private void OnTriggerEnter2D(Collider2D col) {
         if (col.CompareTag("Enemy")) {
-            Debug.Log("true");
+
+            m_gc.scoreIncrement();
+
+            Destroy(gameObject);
+
+            Destroy(col.gameObject);
         }
     }
 }

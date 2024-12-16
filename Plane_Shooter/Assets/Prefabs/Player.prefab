@@ -26,8 +26,8 @@ Transform:
   m_GameObject: {fileID: 1607081770188960206}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.0341, y: 2.662, z: -0.08554077}
-  m_LocalScale: {x: 0.10245307, y: 0.50208974, z: 1}
+  m_LocalPosition: {x: 0.63, y: 2.52, z: -0.0855}
+  m_LocalScale: {x: 0.057998683, y: 0.284233, z: 0.5661}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2536680911719630190}
@@ -86,6 +86,37 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &6705809705361465839
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 525148131548630995}
+  m_Layer: 0
+  m_Name: ShootingPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &525148131548630995
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6705809705361465839}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.626, y: 3.032, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2536680911719630190}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8008580527015359781
 GameObject:
   m_ObjectHideFlags: 0
@@ -112,8 +143,8 @@ Transform:
   m_GameObject: {fileID: 8008580527015359781}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.04, y: 2.3, z: -0.08554077}
-  m_LocalScale: {x: 0.45225194, y: 0.2339, z: 1}
+  m_LocalPosition: {x: 0.6395, y: 2.2039, z: -0.0855}
+  m_LocalScale: {x: 0.307667, y: 0.15912217, z: 0.6803}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2536680911719630190}
@@ -181,6 +212,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2536680911719630190}
+  - component: {fileID: 4748401454279177144}
   - component: {fileID: 9204104126081769526}
   - component: {fileID: 7905672117040338250}
   - component: {fileID: 2711539206382716952}
@@ -206,8 +238,26 @@ Transform:
   m_Children:
   - {fileID: 8414511732233909022}
   - {fileID: 8014788407394417110}
+  - {fileID: 525148131548630995}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4748401454279177144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8799405093824412143}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2268c766e69388344bf93aee24dc8014, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxSpeed: 5
+  giaToc: 7
+  giaTocGiam: 10
+  bullet: {fileID: 3921558943507539029, guid: 44184b9f115692142afe78b2dc958d9c, type: 3}
+  shootingPoint: {fileID: 525148131548630995}
 --- !u!50 &9204104126081769526
 Rigidbody2D:
   serializedVersion: 4
@@ -269,7 +319,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 1.0523509, y: 2.29437}
+  m_Offset: {x: 0.6427902, y: 2.203029}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -279,7 +329,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 2.5173433, y: 0.5961909}
+  m_Size: {x: 1.6982219, y: 0.41350937}
   m_EdgeRadius: 0
 --- !u!61 &2711539206382716952
 BoxCollider2D:
@@ -315,7 +365,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 1.0339961, y: 2.9429116}
+  m_Offset: {x: 0.63032836, y: 2.645317}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -325,5 +375,5 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.5717173, y: 0.71855736}
+  m_Size: {x: 0.30653405, y: 0.46516037}
   m_EdgeRadius: 0

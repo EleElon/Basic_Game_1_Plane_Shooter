@@ -52,7 +52,7 @@ public class GameController : MonoBehaviour {
             m_spawnBGTime -= Time.deltaTime;
 
             if (m_spawnTime < 0) {
-                // enemySpawn();
+                enemySpawn();
 
                 m_spawnTime = spawnTime;
             }

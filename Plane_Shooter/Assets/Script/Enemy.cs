@@ -18,6 +18,7 @@ public class Enemy : MonoBehaviour {
         m_rb = GetComponent<Rigidbody2D>();
         m_gc = FindAnyObjectByType<GameController>();
         m_ui = FindAnyObjectByType<UIManager>();
+        aum = FindAnyObjectByType<AudioManager>();
     }
 
     // Update is called once per frame

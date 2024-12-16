@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour {
 
-    public Text scoreText;
+    public Text scoreText, bulletsText, healthText, staminaText;
 
     public GameObject gameOverPanel;
 
@@ -42,5 +42,16 @@ public class UIManager : MonoBehaviour {
     public void Resume() {
         gamePausePanel.SetActive(false);
         Time.timeScale = 1;
+    }
+
+    public void setBulletsText(string txt) {
+        if (bulletsText) {
+            bulletsText.text = txt;
+        }
+    }
+
+    public void SetHealthText(string txt) {
+        if (healthText)
+            healthText.text = txt;
     }
 }

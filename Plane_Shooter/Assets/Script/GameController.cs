@@ -21,16 +21,26 @@ public class GameController : MonoBehaviour {
 
     UIManager m_ui;
 
+    int HP = 3;
+
+    public Player u;
+
     // Start is called before the first frame update
     void Start() {
         m_spawnTime = 0;
         m_ui = FindAnyObjectByType<UIManager>();
         m_ui.SetScoreText("Score: " + m_score);
+
+        string HPString = string.Empty;
+        for (int i = 0; i < HP; i++) {
+            HPString += "❤";
+        }
+
+        m_ui.SetHealthText(HPString);
     }
 
     // Update is called once per frame
     void Update() {
-
         if (!m_isGameOver) {
             m_spawnTime -= Time.deltaTime;
             m_spawnBGTime -= Time.deltaTime;
@@ -56,6 +66,17 @@ public class GameController : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.Escape)) {
             m_ui.ShowGamePausePanel(true);
         }
+
+        if (HP == 0) {
+            m_isGameOver = true;
+
+            if (u) {
+                Destroy(u.gameObject);
+            }
+            else {
+                return;
+            }
+        }
     }
 
     public void backToMenu() {
@@ -70,7 +91,7 @@ public class GameController : MonoBehaviour {
             return;
         }
 
-        Vector2 spawnBG = new Vector2(0, 6);
+        Vector2 spawnBG = new Vector2(0, 28);
         if (background) {
             Instantiate(background, spawnBG, Quaternion.identity);
         }
@@ -95,8 +116,20 @@ public class GameController : MonoBehaviour {
     }
 
     public void scoreIncrement() {
+        if (m_isGameOver || m_ui.IsGamePause())
+            return;
         m_score++;
         m_ui.SetScoreText("Score: " + m_score);
+    }
+
+    public void HPDecrease() {
+        HP--;
+        string HPString = string.Empty;
+        for (int i = 0; i < HP; i++) {
+            HPString += "❤";
+        }
+
+        m_ui.SetHealthText(HPString);
     }
 
     public void setGameOver(bool state) {

@@ -27,10 +27,23 @@ public class Player : MonoBehaviour {
 
     UIManager m_ui;
 
+    int bulletsRemaining = 10;
+
+    public float timeToGetBullet;
+
+    float m_timeToGetBullet;
+
     // Start is called before the first frame update
     void Start() {
         m_gc = FindAnyObjectByType<GameController>();
         m_ui = FindAnyObjectByType<UIManager>();
+
+        string bulletsString = string.Empty;
+        for (int i = 0; i < 10; i++) {
+            bulletsString += "|=>";
+        }
+
+        m_ui.setBulletsText(bulletsString);
     }
 
     // Update is called once per frame
@@ -55,6 +68,22 @@ public class Player : MonoBehaviour {
             }
         }
 
+        if (bulletsRemaining < 10) {
+            m_timeToGetBullet -= Time.deltaTime;
+
+            if (m_timeToGetBullet <= 0) {
+                bulletsRemaining++;
+                m_timeToGetBullet = timeToGetBullet;
+            }
+        }
+
+        string bulletsString = string.Empty;
+        for (int i = 0; i < bulletsRemaining; i++) {
+            bulletsString += "|=>";
+        }
+
+        m_ui.setBulletsText(bulletsString);
+
         // transform.position += Vector3.right * moveSpeed * x_Posi * Time.deltaTime;
         // transform.position += Vector3.up * moveSpeed * y_Posi * Time.deltaTime;
         transform.Translate(moveSpeed * Time.deltaTime);
@@ -65,17 +94,31 @@ public class Player : MonoBehaviour {
     }
 
     public void Shoot() {
+        if (bulletsRemaining == 0) {
+            return;
+        }
+
         if (bullet && shootingPoint) {
             if (aus & shootingPoint) {
                 aus.PlayOneShot(shootingSound);
             }
             Instantiate(bullet, shootingPoint.position, quaternion.identity);
         }
+
+        bulletsRemaining--;
+
+        string bulletsString = string.Empty;
+        for (int i = 0; i < bulletsRemaining; i++) {
+            bulletsString += "|=>";
+        }
+
+        m_ui.setBulletsText(bulletsString);
     }
 
     private void OnCollisionEnter2D(Collision2D col) {
         if (col.gameObject.CompareTag("Enemy")) {
-            m_gc.setGameOver(true);
+            // m_gc.setGameOver(true);
+            m_gc.HPDecrease();
 
             Destroy(col.gameObject);
         }
@@ -83,7 +126,8 @@ public class Player : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D other) {
         if (other.CompareTag("Enemy")) {
-            m_gc.setGameOver(true);
+            // m_gc.setGameOver(true);
+            m_gc.HPDecrease();
 
             Destroy(other.gameObject);
         }

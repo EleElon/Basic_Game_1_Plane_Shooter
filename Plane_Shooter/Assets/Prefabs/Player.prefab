@@ -261,6 +261,7 @@ MonoBehaviour:
   shootingPoint: {fileID: 525148131548630995}
   aus: {fileID: 0}
   shootingSound: {fileID: 8300000, guid: f035339e0c62ffb4db4e7a27fb58db3e, type: 3}
+  timeToGetBullet: 3
 --- !u!50 &9204104126081769526
 Rigidbody2D:
   serializedVersion: 4

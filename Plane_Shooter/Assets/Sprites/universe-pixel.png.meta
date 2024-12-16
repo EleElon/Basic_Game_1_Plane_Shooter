@@ -130,7 +130,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      universe-pixel_0: 2019245041070280044
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -51,4 +51,11 @@ public class Player : MonoBehaviour {
             Instantiate(bullet, shootingPoint.position, quaternion.identity);
         }
     }
+
+    private void OnCollisionEnter2D(Collision2D col) {
+        if (col.gameObject.CompareTag("Enemy")) {
+            Debug.Log("trueeee");
+        }
+    }
+    
 }

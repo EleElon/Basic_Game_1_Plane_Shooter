@@ -25,7 +25,7 @@ public class GameController : MonoBehaviour {
 
     public Player u;
 
-    public AudioManager aum;
+    // public AudioManager aum;
 
     private void Awake() {
         // aum = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
@@ -70,7 +70,17 @@ public class GameController : MonoBehaviour {
         }
 
         if (Input.GetKeyDown(KeyCode.Escape)) {
-            m_ui.ShowGamePausePanel(true);
+
+            if (m_ui.IsSettingPanelActive()) {
+                m_ui.ShowSettingPanel(false);
+                m_ui.ShowGamePausePanel(true);
+            }
+            else if (!m_ui.IsGamePaused()) {
+                m_ui.Pause();
+            }
+            else {
+                m_ui.Resume();
+            }
         }
 
         if (HP == 0) {
@@ -85,13 +95,25 @@ public class GameController : MonoBehaviour {
         }
     }
 
-    public void backToMenu() {
+    public void setting() {
+        m_ui.ShowGamePausePanel(false);
+        m_ui.ShowSettingPanel(true);
+    }
 
+    public void CloseSettingPanel() {
+        m_ui.ShowSettingPanel(false);
+        m_ui.ShowGamePausePanel(true);
+    }
+
+    public void backToMenu() {
+        SceneManager.LoadScene("Menu");
     }
 
     public void Again() {
         SceneManager.LoadScene("GamePlay");
+        m_ui.Resume();
     }
+
     public void BGSpawn() {
         if (m_ui.IsGamePause() || m_isGameOver) {
             return;

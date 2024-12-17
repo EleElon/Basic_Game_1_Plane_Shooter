@@ -8,6 +8,10 @@ public class MenuController : MonoBehaviour {
         SceneManager.LoadScene("GamePlay");
     }
 
+    public void setting() {
+        SceneManager.LoadScene("Setting");
+    }
+
     public void exit() {
         Application.Quit();
     }

@@ -85,9 +85,14 @@ public class Player : MonoBehaviour {
         // transform.position += Vector3.right * moveSpeed * x_Posi * Time.deltaTime;
         // transform.position += Vector3.up * moveSpeed * y_Posi * Time.deltaTime;
         transform.Translate(moveSpeed * Time.deltaTime);
+        if (m_ui.IsGamePause() || m_gc.isGameOver() || !m_ui.IsSettingPanelActive()) {
 
-        if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0)) {
-            Shoot();
+            if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0)) {
+                Shoot();
+            }
+        }
+        else {
+            return;
         }
     }
 
@@ -128,7 +133,7 @@ public class Player : MonoBehaviour {
             if (aum && aum.loseSound) {
                 aum.playSFX(aum.loseSound);
             }
-            
+
             m_gc.HPDecrease();
 
             Destroy(other.gameObject);

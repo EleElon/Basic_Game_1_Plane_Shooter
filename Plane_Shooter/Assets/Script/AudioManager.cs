@@ -3,60 +3,77 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class AudioManager : MonoBehaviour {
+    [Header("---------- Audio Source ----------")]
     public AudioSource musicAudioSource;
     public AudioSource sfxAudioSource;
 
-    public List<AudioClip> musicTracks; 
+    [Header("---------- Music Tracks ----------")]
+    public List<AudioClip> musicTracks;
+
+    [Header("---------- Audio Clips ----------")]
     public AudioClip shootingSound;
     public AudioClip deathSound;
     public AudioClip loseSound;
 
     int currentMusicTrackIndex = -1;
 
+    public static AudioManager instance;
+
     private void Start() {
         if (musicTracks.Count > 0) {
-            PlayMusic(currentMusicTrackIndex); // Phát bài nhạc đầu tiên
+            PlayMusic(currentMusicTrackIndex);
         }
     }
 
     private void Update() {
-        // Tự động chuyển bài nhạc khi bài hiện tại kết thúc
         if (!musicAudioSource.isPlaying && musicTracks.Count > 0) {
             PlayRandomMusic();
         }
     }
+
+    // private void Awake() {
+    //     if (instance != null && instance != this) {
+    //         Destroy(gameObject);
+    //     }
+    //     else {
+    //         instance = this;
+    //         DontDestroyOnLoad(gameObject);
+    //     }
+    // }
 
     public void PlayMusic(int trackIndex) {
         if (trackIndex >= 0 && trackIndex < musicTracks.Count) {
             musicAudioSource.clip = musicTracks[trackIndex];
             musicAudioSource.Play();
             currentMusicTrackIndex = trackIndex;
-        } else {
+        }
+        else {
             Debug.LogWarning("Track index out of range!");
         }
     }
-    
+
     public void PlayRandomMusic() {
         if (musicTracks.Count > 1) {
             int randomIndex;
             do {
                 randomIndex = Random.Range(0, musicTracks.Count);
-            } while (randomIndex == currentMusicTrackIndex); // Đảm bảo không phát lại bài vừa phát
+            } while (randomIndex == currentMusicTrackIndex);
 
             currentMusicTrackIndex = randomIndex;
             PlayMusic(randomIndex);
-        } else if (musicTracks.Count == 1) {
-            PlayMusic(0); // Nếu chỉ có một bài nhạc, phát bài đó
+        }
+        else if (musicTracks.Count == 1) {
+            PlayMusic(0);
         }
     }
 
     public void PlayNextMusic() {
-        currentMusicTrackIndex = (currentMusicTrackIndex + 1) % musicTracks.Count; // Chuyển bài kế tiếp, vòng lặp khi hết danh sách
+        currentMusicTrackIndex = (currentMusicTrackIndex + 1) % musicTracks.Count;
         PlayMusic(currentMusicTrackIndex);
     }
 
     public void PlayPreviousMusic() {
-        currentMusicTrackIndex = (currentMusicTrackIndex - 1 + musicTracks.Count) % musicTracks.Count; // Chuyển bài trước đó
+        currentMusicTrackIndex = (currentMusicTrackIndex - 1 + musicTracks.Count) % musicTracks.Count;
         PlayMusic(currentMusicTrackIndex);
     }
 

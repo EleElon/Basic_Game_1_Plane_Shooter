@@ -43,6 +43,9 @@ public class GameController : MonoBehaviour {
         }
 
         m_ui.SetHealthText(HPString);
+
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     // Update is called once per frame
@@ -66,6 +69,10 @@ public class GameController : MonoBehaviour {
         else {
             m_spawnTime = 0;
             m_ui.ShowGameOverPannel(true);
+
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            
             return;
         }
 
@@ -74,13 +81,31 @@ public class GameController : MonoBehaviour {
             if (m_ui.IsSettingPanelActive()) {
                 m_ui.ShowSettingPanel(false);
                 m_ui.ShowGamePausePanel(true);
+
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
             }
             else if (!m_ui.IsGamePaused()) {
                 m_ui.Pause();
+
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
             }
             else {
                 m_ui.Resume();
+
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
             }
+
+            // if (Input.GetKey(KeyCode.LeftAlt)) {
+            //     Cursor.lockState = CursorLockMode.None;
+            //     Cursor.visible = true;
+            // }
+            // else if (!m_ui.IsGamePaused() && !m_ui.IsSettingPanelActive()) {
+            //     Cursor.lockState = CursorLockMode.Locked;
+            //     Cursor.visible = false;
+            // }
         }
 
         if (HP == 0) {

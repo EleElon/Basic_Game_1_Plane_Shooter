@@ -60,6 +60,13 @@ public class UIManager : MonoBehaviour {
         Time.timeScale = 1;
     }
 
+    public void Start() {
+        gameOverPanel.SetActive(false);
+        gamePausePanel.SetActive(false);
+        gameSettingPanel.SetActive(false);
+        Time.timeScale = 1;
+    }
+
     public void OpenSettingFromPause() {
         gamePausePanel.SetActive(false);
         ShowSettingPanel(true);

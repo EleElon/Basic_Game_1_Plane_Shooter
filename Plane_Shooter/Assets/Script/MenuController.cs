@@ -4,8 +4,15 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class MenuController : MonoBehaviour {
+    UIManager m_ui;
+
+    private void Start() {
+        m_ui = FindAnyObjectByType<UIManager>();
+    }
+
     public void newGame() {
         SceneManager.LoadScene("GamePlay");
+        m_ui.Start();
     }
 
     public void setting() {

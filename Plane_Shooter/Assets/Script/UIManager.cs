@@ -60,7 +60,7 @@ public class UIManager : MonoBehaviour {
         Time.timeScale = 1;
     }
 
-    public void Start() {
+    public void StartGame() {
         gameOverPanel.SetActive(false);
         gamePausePanel.SetActive(false);
         gameSettingPanel.SetActive(false);

@@ -12,7 +12,7 @@ public class MenuController : MonoBehaviour {
 
     public void newGame() {
         SceneManager.LoadScene("GamePlay");
-        m_ui.Start();
+        m_ui.StartGame();
     }
 
     public void setting() {

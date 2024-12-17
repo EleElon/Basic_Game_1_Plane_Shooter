@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour {
 
-    public Text scoreText, bulletsText, healthText, staminaText;
+    public Text scoreText, bulletsText, healthText;
 
     public GameObject gameOverPanel;
 

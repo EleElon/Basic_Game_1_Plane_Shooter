@@ -254,8 +254,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxSpeed: 5
+  dashSpeed: 10
   giaToc: 7
   giaTocGiam: 10
+  phanh: 20
   bullet: {fileID: 3921558943507539029, guid: 44184b9f115692142afe78b2dc958d9c, type: 3}
   m_gc: {fileID: 0}
   shootingPoint: {fileID: 525148131548630995}

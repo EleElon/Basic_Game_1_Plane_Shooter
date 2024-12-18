@@ -18,7 +18,7 @@ public class Stamina : MonoBehaviour {
 
     public float m_restoreStamina;
 
-    bool isWaiting = false;
+    // bool isWaiting = false;
 
     public bool canDash = true;
 
@@ -59,12 +59,12 @@ public class Stamina : MonoBehaviour {
     }
 
     private IEnumerator WaitForStaminaRecovery() {
-        isWaiting = true;
+        // isWaiting = true;
 
         StaminaIncre();
 
         yield return new WaitForSeconds(3f);
-        isWaiting = false;
+        // isWaiting = false;
         canDash = true;
     }
 }

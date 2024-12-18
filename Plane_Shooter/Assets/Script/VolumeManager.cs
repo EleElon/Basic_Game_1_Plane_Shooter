@@ -8,11 +8,11 @@ public class VolumeManager : MonoBehaviour {
     [Header("---------- UI References ----------")]
     public Slider masterSlider;
     public Slider musicSlider;
-    public Slider vfxSlider;
+    public Slider sfxSlider;
 
     public Text masterText;
     public Text musicText;
-    public Text vfxText;
+    public Text sfxText;
 
     [Header("---------- Audio Mixer ----------")]
     public AudioMixer audioMixer;
@@ -20,12 +20,12 @@ public class VolumeManager : MonoBehaviour {
     // Keys lưu trong PlayerPrefs
     private const string MasterKey = "MasterVolume";
     private const string MusicKey = "MusicVolume";
-    private const string VFXKey = "VFXVolume";
+    private const string SFXKey = "SFXVolume";
 
     void Start() {
         InitializeSlider(masterSlider, MasterKey, "MasterVolume", masterText);
         InitializeSlider(musicSlider, MusicKey, "MusicVolume", musicText);
-        InitializeSlider(vfxSlider, VFXKey, "VFXVolume", vfxText);
+        InitializeSlider(sfxSlider, SFXKey, "SFXVolume", sfxText);
     }
 
     void InitializeSlider(Slider slider, string key, string exposedParam, Text text) {

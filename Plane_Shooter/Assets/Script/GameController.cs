@@ -25,6 +25,8 @@ public class GameController : MonoBehaviour {
 
     public Player u;
 
+    bool isGameOverPanelShow = false;
+
     // public AudioManager aum;
 
     private void Awake() {
@@ -50,6 +52,40 @@ public class GameController : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
+
+        if (Input.GetKeyDown(KeyCode.Escape)) {
+
+            if (m_ui.IsSettingPanelActive()) {
+
+                m_ui.ShowSettingPanel(false);
+
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+
+                if (!m_ui.IsGamePausePanelActive() && !m_isGameOver) {
+                    CloseSettingPanel();
+                }
+                else if (!m_ui.IsGameOverPanelActive()) {
+                    CloseSettingPanel();
+                }
+            }
+            else if (m_isGameOver) {
+                return;
+            }
+            else if (!m_ui.IsGamePaused()) {
+                m_ui.Pause();
+
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+            }
+            else if (m_ui.IsGamePaused()) {
+                m_ui.Resume();
+
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+            }
+        }
+
         if (!m_isGameOver) {
             m_spawnTime -= Time.deltaTime;
             m_spawnBGTime -= Time.deltaTime;
@@ -67,46 +103,27 @@ public class GameController : MonoBehaviour {
             }
         }
         else {
-            m_spawnTime = 0;
-            m_ui.ShowGameOverPannel(true);
+            if (!isGameOverPanelShow) {
+                m_spawnTime = 0;
+                m_ui.ShowGameOverPannel(true);
+                m_ui.SetUIDisable();
 
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
-            
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+
+                isGameOverPanelShow = true;
+            }
             return;
         }
 
-        if (Input.GetKeyDown(KeyCode.Escape)) {
-
-            if (m_ui.IsSettingPanelActive()) {
-                m_ui.ShowSettingPanel(false);
-                m_ui.ShowGamePausePanel(true);
-
-                Cursor.lockState = CursorLockMode.None;
-                Cursor.visible = true;
-            }
-            else if (!m_ui.IsGamePaused()) {
-                m_ui.Pause();
-
-                Cursor.lockState = CursorLockMode.None;
-                Cursor.visible = true;
-            }
-            else {
-                m_ui.Resume();
-
-                Cursor.lockState = CursorLockMode.Locked;
-                Cursor.visible = false;
-            }
-
-            // if (Input.GetKey(KeyCode.LeftAlt)) {
-            //     Cursor.lockState = CursorLockMode.None;
-            //     Cursor.visible = true;
-            // }
-            // else if (!m_ui.IsGamePaused() && !m_ui.IsSettingPanelActive()) {
-            //     Cursor.lockState = CursorLockMode.Locked;
-            //     Cursor.visible = false;
-            // }
-        }
+        // if (Input.GetKey(KeyCode.LeftAlt)) {
+        //     Cursor.lockState = CursorLockMode.None;
+        //     Cursor.visible = true;
+        // }
+        // else if (!m_ui.IsGamePaused() && !m_ui.IsSettingPanelActive()) {
+        //     Cursor.lockState = CursorLockMode.Locked;
+        //     Cursor.visible = false;
+        // }
 
         if (HP == 0) {
             m_isGameOver = true;
@@ -121,13 +138,27 @@ public class GameController : MonoBehaviour {
     }
 
     public void setting() {
-        m_ui.ShowGamePausePanel(false);
-        m_ui.ShowSettingPanel(true);
+        if (m_ui.gamePausePanel && m_ui.gamePausePanel.activeSelf) {
+            m_ui.ShowGamePausePanel(false);
+            m_ui.ShowSettingPanel(true);
+        }
+        else if (m_ui.gameOverPanel && m_ui.gameOverPanel.activeSelf) {
+            m_ui.ShowGameOverPannel(false);
+            m_ui.ShowSettingPanel(true);
+        }
     }
 
     public void CloseSettingPanel() {
+
         m_ui.ShowSettingPanel(false);
-        m_ui.ShowGamePausePanel(true);
+
+        if (!m_isGameOver) {
+            m_ui.ShowGamePausePanel(true);
+        }
+        else {
+            m_ui.ShowGameOverPannel(true);
+            return;
+        }
     }
 
     public void backToMenu() {
@@ -140,7 +171,7 @@ public class GameController : MonoBehaviour {
     }
 
     public void BGSpawn() {
-        if (m_ui.IsGamePause() || m_isGameOver) {
+        if (m_ui.IsGamePausePanelActive() || m_isGameOver) {
             return;
         }
 
@@ -150,7 +181,7 @@ public class GameController : MonoBehaviour {
         }
     }
     public void enemySpawn() {
-        if (m_ui.IsGamePause() || m_isGameOver)
+        if (m_ui.IsGamePausePanelActive() || m_isGameOver)
             return;
 
         float randXPosi = Random.Range(-7f, 7f);
@@ -169,7 +200,7 @@ public class GameController : MonoBehaviour {
     }
 
     public void scoreIncrement() {
-        if (m_isGameOver || m_ui.IsGamePause())
+        if (m_isGameOver || m_ui.IsGamePausePanelActive())
             return;
         m_score++;
         m_ui.SetScoreText("Score: " + m_score);

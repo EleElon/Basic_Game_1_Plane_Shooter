@@ -23,7 +23,7 @@ public class Enemy : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        if (m_gc.isGameOver() || m_ui.IsGamePause()) {
+        if (m_gc.isGameOver() || m_ui.IsGamePausePanelActive()) {
             m_rb.velocity = Vector2.zero;
             return;
         }

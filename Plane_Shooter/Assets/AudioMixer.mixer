@@ -20,7 +20,7 @@ AudioMixerGroupController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: VFX
+  m_Name: SFX
   m_AudioMixer: {fileID: 24100000}
   m_GroupID: ce12f4973e1478444b5a918a28b49523
   m_Children: []
@@ -54,7 +54,7 @@ AudioMixerController:
   - guid: 9f7a7f59fc307fd45b3f5f4a20ed515c
     name: MusicVolume
   - guid: 9a3fdf5b3c041a5419679a6956e5cf6f
-    name: VFXVolume
+    name: SFXVolume
   m_AudioMixerGroupViews:
   - guids:
     - 77761c95ef719bd43888f21da17cd541

@@ -43,7 +43,7 @@ public class Bullet : MonoBehaviour {
             return;
         }
 
-        if (m_ui.IsGamePause()) {
+        if (m_ui.IsGamePausePanelActive()) {
             isPaused = true;
         }
         else {
@@ -59,7 +59,7 @@ public class Bullet : MonoBehaviour {
             }
         }
         
-        if (m_gc.isGameOver() || m_ui.IsGamePause()) {
+        if (m_gc.isGameOver() || m_ui.IsGamePausePanelActive()) {
             m_rb.velocity = Vector2.zero;
             return;
         }

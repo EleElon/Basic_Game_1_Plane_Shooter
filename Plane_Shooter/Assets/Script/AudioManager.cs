@@ -48,7 +48,7 @@ public class AudioManager : MonoBehaviour {
             currentMusicTrackIndex = trackIndex;
         }
         else {
-            Debug.LogWarning("Track index out of range!");
+            // Debug.LogWarning("Track index out of range!");
         }
     }
 

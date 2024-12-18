@@ -54,7 +54,7 @@ public class Player : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        if (m_ui.IsGamePause() || m_gc.isGameOver())
+        if (m_ui.IsGamePausePanelActive() || m_gc.isGameOver())
             return;
 
         if (Input.GetKey(KeyCode.LeftShift) && m_stm.canDash && m_stm.stamina > 0) {
@@ -87,7 +87,7 @@ public class Player : MonoBehaviour {
         // transform.position += Vector3.right * moveSpeed * x_Posi * Time.deltaTime;
         // transform.position += Vector3.up * moveSpeed * y_Posi * Time.deltaTime;
         transform.Translate(moveSpeed * Time.deltaTime);
-        if (m_ui.IsGamePause() || m_gc.isGameOver() || !m_ui.IsSettingPanelActive()) {
+        if (m_ui.IsGamePausePanelActive() || m_gc.isGameOver() || !m_ui.IsSettingPanelActive()) {
 
             if (Input.GetMouseButtonDown(0)) {
                 Shoot();

@@ -163,6 +163,8 @@ public class GameController : MonoBehaviour {
 
     public void backToMenu() {
         SceneManager.LoadScene("Menu");
+
+        m_ui.Resume();
     }
 
     public void Again() {

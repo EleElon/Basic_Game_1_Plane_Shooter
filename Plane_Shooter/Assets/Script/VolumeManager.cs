@@ -42,7 +42,8 @@ public class VolumeManager : MonoBehaviour {
     }
 
     void ApplyVolume(string exposedParam, float value, Text text) {
-        float volumeInDb = Mathf.Log10(Mathf.Clamp(value, 0.0001f, 1f)) * 20;
+        float boostdB = 2f;
+        float volumeInDb = Mathf.Log10(Mathf.Clamp(value, 0.0001f, 1f)) * 20 + boostdB * value;
         audioMixer.SetFloat(exposedParam, volumeInDb);
 
         if (text != null) {

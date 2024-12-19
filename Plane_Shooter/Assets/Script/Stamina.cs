@@ -12,6 +12,8 @@ public class Stamina : MonoBehaviour {
 
     public float stamina;
 
+    public float staminaBeUsed;
+
     public float lerpSpeed = 0.03f;
 
     public float restoreStamina;
@@ -39,7 +41,7 @@ public class Stamina : MonoBehaviour {
     }
 
     public void StaminaDescre() {
-        stamina--;
+        stamina -= staminaBeUsed;
         if (stamina <= 0) {
             canDash = false;
             StartCoroutine(WaitForStaminaRecovery());

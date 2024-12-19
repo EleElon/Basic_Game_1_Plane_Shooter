@@ -15,23 +15,56 @@ public class MenuController : MonoBehaviour {
 
     public Button exitButton;
 
+    public Text nameGameTittle1;
+
+    public Text nameGameTittle2;
+
+    public static bool shouldResetAnim = false;
+
+    public GameObject BG;
+
+    public float spawnBGTime;
+
+    float m_spawnBGTime;
+
     private void Start() {
         m_ui = FindAnyObjectByType<UIManager>();
         m_guide = FindAnyObjectByType<GuidePanelManager>();
     }
 
     private void Update() {
+
+        m_spawnBGTime -= Time.deltaTime;
+
+
         if (Input.GetKeyDown(KeyCode.Escape)) {
             m_guide.HideGuidePanel(true);
             m_guide.ShowGuidePanel(false);
 
             SetUIEnable();
         }
+
+        if (m_spawnBGTime < 0) {
+            BGMenuSpawn();
+
+            m_spawnBGTime = spawnBGTime;
+        }
+    }
+
+    public void BGMenuSpawn() {
+
+        Vector2 spawnBG = new Vector2(0, 28);
+        if (BG) {
+            Instantiate(BG, spawnBG, Quaternion.identity);
+        }
     }
 
     public void newGame() {
         SceneManager.LoadScene("GamePlay");
+
         m_ui.StartGame();
+
+        SetUIDisable();
     }
 
     public void Guide() {
@@ -62,6 +95,12 @@ public class MenuController : MonoBehaviour {
         if (exitButton) {
             exitButton.gameObject.SetActive(false);
         }
+        if (nameGameTittle1) {
+            nameGameTittle1.gameObject.SetActive(false);
+        }
+        if (nameGameTittle2) {
+            nameGameTittle2.gameObject.SetActive(false);
+        }
     }
 
     public void SetUIEnable() {
@@ -73,6 +112,12 @@ public class MenuController : MonoBehaviour {
         }
         if (exitButton) {
             exitButton.gameObject.SetActive(true);
+        }
+        if (nameGameTittle1) {
+            nameGameTittle1.gameObject.SetActive(true);
+        }
+        if (nameGameTittle2) {
+            nameGameTittle2.gameObject.SetActive(true);
         }
     }
 }
